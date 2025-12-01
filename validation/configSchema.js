@@ -60,7 +60,94 @@ const brandColorsSchema = z.object({
   text: hexColorSchema,
   error: hexColorSchema,
   success: hexColorSchema,
-}).passthrough(); // Allow additional custom colors
+}).passthrough();
+
+// Typography schema
+const typographySchema = z.object({
+  fontFamily: z.object({
+    heading: z.string(),
+    body: z.string(),
+    monospace: z.string(),
+  }),
+  fontSize: z.object({
+    xs: z.number().positive(),
+    sm: z.number().positive(),
+    md: z.number().positive(),
+    lg: z.number().positive(),
+    xl: z.number().positive(),
+    xxl: z.number().positive(),
+  }),
+  fontWeight: z.object({
+    normal: z.string(),
+    medium: z.string(),
+    semibold: z.string(),
+    bold: z.string(),
+  }),
+}).optional();
+
+// Social login schema
+const socialLoginSchema = z.object({
+  google: z.boolean(),
+  apple: z.boolean(),
+  facebook: z.boolean(),
+}).optional();
+
+// Features schema (now more structured)
+const featuresSchema = z.object({
+  auth: z.boolean().optional(),
+  socialLogin: socialLoginSchema,
+  biometric: z.boolean().optional(),
+  notifications: z.boolean().optional(),
+  darkMode: z.boolean().optional(),
+  chat: z.boolean().optional(),
+  fileUpload: z.boolean().optional(),
+  offlineMode: z.boolean().optional(),
+}).passthrough().optional();
+
+// Onboarding step schema
+const onboardingStepSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  icon: z.string().optional(),
+});
+
+// Content schema
+const contentSchema = z.object({
+  onboarding: z.object({
+    step1: onboardingStepSchema,
+    step2: onboardingStepSchema,
+    step3: onboardingStepSchema,
+  }),
+  buttons: z.object({
+    primary: z.string(),
+    secondary: z.string(),
+    login: z.string(),
+    signup: z.string(),
+  }),
+  tabs: z.object({
+    home: z.string(),
+    search: z.string(),
+    notifications: z.string(),
+    profile: z.string(),
+  }),
+}).optional();
+
+// Tab config schema
+const tabConfigSchema = z.object({
+  id: z.string(),
+  icon: z.string(),
+  label: z.string(),
+  enabled: z.boolean(),
+});
+
+// Navigation schema
+const navigationSchema = z.object({
+  tabBar: z.object({
+    position: z.enum(['bottom', 'top']),
+    showLabels: z.boolean(),
+  }),
+  tabs: z.array(tabConfigSchema),
+}).optional();
 
 // Splash screen schema
 const splashSchema = z.object({
@@ -95,9 +182,6 @@ const webSchema = z.object({
   favicon: assetPathSchema.optional(),
 }).optional();
 
-// Features schema
-const featuresSchema = z.record(z.boolean()).optional();
-
 // Main client configuration schema
 const clientConfigSchema = z.object({
   // App Identity
@@ -117,10 +201,17 @@ const clientConfigSchema = z.object({
   
   // Branding
   brandColors: brandColorsSchema,
+  typography: typographySchema,
   theme: z.enum(['light', 'dark', 'automatic']).optional(),
   
   // Features
   features: featuresSchema,
+  
+  // Content
+  content: contentSchema,
+  
+  // Navigation
+  navigation: navigationSchema,
   
   // API & Support
   apiUrl: urlSchema.optional(),
@@ -129,7 +220,7 @@ const clientConfigSchema = z.object({
   // Localization
   locale: localeSchema.optional(),
   supportedLocales: z.array(localeSchema).optional(),
-}).strict(); // Don't allow unknown fields
+}).passthrough(); // Allow additional custom fields
 
 /**
  * Validates a client configuration object
@@ -184,10 +275,13 @@ module.exports = {
     url: urlSchema,
     locale: localeSchema,
     brandColors: brandColorsSchema,
+    typography: typographySchema,
     splash: splashSchema,
     ios: iosSchema,
     android: androidSchema,
     web: webSchema,
     features: featuresSchema,
+    content: contentSchema,
+    navigation: navigationSchema,
   },
 };

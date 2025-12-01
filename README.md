@@ -1,8 +1,15 @@
 # White Label Multi-Brand App System
 
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/MichaelEakins/whitelabel-app/releases)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
+[![Expo SDK](https://img.shields.io/badge/Expo-SDK%2054-000000.svg?logo=expo)](https://expo.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue.svg?logo=typescript)](https://www.typescriptlang.org/)
+
 **One Codebase. Seven Brands. Infinite Possibilities.**
 
 A production-ready React Native white-label app system that powers multiple completely different apps from a single codebase. Change brands instantly with just an environment variable—no code changes required.
+
+📖 **[View Changelog](./CHANGELOG.md)** • 🚀 **[Quick Start](#quick-start)** • 📊 **[Live Demo](#live-demo-portfolio)** • 🎨 **[Dashboard](#configuration-dashboard)**
 
 ---
 
@@ -118,6 +125,12 @@ CLIENT=techstartup npm start
 - **Industry-Specific** - Custom features per client
 - **Production Ready** - Separate App Store/Play Store builds
 
+### Visual Configuration Dashboard
+- **Web-Based UI** - No coding required to create new clients
+- **Live Preview** - See your branding in real-time
+- **Color Pickers** - Visual interface for brand colors
+- **One-Click Export** - Download ready-to-use config files
+
 ### Full App Screens
 - **Onboarding** - 3-step welcome flow
 - **Authentication** - Login, signup, password recovery
@@ -145,7 +158,7 @@ CLIENT=techstartup npm start
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/whitelabel-app.git
+git clone https://github.com/MichaelEakins/whitelabel-app.git
 cd whitelabel-app
 
 # Install dependencies
@@ -195,6 +208,118 @@ CLIENT=techstartup npx expo start --clear
 
 ---
 
+## Configuration Dashboard
+
+### Visual UI for Creating White-Label Apps
+
+The included web dashboard provides a **no-code interface** for creating and configuring new white-label apps with live preview.
+
+**Launch the Dashboard:**
+
+```bash
+# Navigate to dashboard directory
+cd dashboard
+
+# Install dependencies (first time only)
+npm install
+
+# Start the dashboard
+npm run dev
+```
+
+Open **http://localhost:3001** in your browser.
+
+### Dashboard Features
+
+**Visual Configuration:**
+- App name and identity fields
+- Visual color pickers for all 7 brand colors
+- Auto-generation of slugs and bundle identifiers
+- Feature flag toggles (auth, notifications, dark mode)
+- API endpoint and support email configuration
+- Language/locale selection
+
+**Live Mobile Preview:**
+- Real-time preview in mobile device frame
+- See buttons, headers, and UI elements with your colors
+- Preview color palette
+- Instant updates as you configure
+
+**One-Click Export:**
+- Download fully-formatted configuration file
+- Ready to use in the main app
+- Includes all necessary fields and comments
+
+### Dashboard Workflow
+
+**Step 1: Configure Your App**
+
+1. Open dashboard at http://localhost:3001
+2. Enter your **App Name** (e.g., "My Fitness App")
+   - Slug auto-generates (e.g., "myfitnessapp")
+   - Bundle IDs auto-generate (e.g., "com.myfitnessapp.app")
+3. Choose your **Brand Colors** using visual color pickers:
+   - Primary (main brand color)
+   - Secondary (accents and highlights)
+   - Accent (call-to-action elements)
+   - Background, Text, Error, Success
+4. Toggle **Feature Flags**:
+   - Authentication
+   - Push Notifications
+   - Dark Mode
+5. Set **API Configuration**:
+   - API URL (e.g., "https://api.myfitnessapp.com")
+   - Support Email
+   - Default Language
+
+**Step 2: Live Preview**
+
+Watch the mobile preview update in real-time as you make changes:
+- Header shows your app name with primary color
+- Buttons display with your chosen colors
+- Stats and UI elements update instantly
+- Color palette preview at bottom
+
+**Step 3: Export Configuration**
+
+1. Click **"Download Configuration File"** button
+2. Save the file to your main project's `configs/` directory
+   - File name: `yourapp.config.js`
+
+**Step 4: Deploy Your New App**
+
+```bash
+# Back in the main project directory
+cd ..
+
+# Generate placeholder assets
+npm run generate-assets yourapp
+
+# Validate the configuration
+npm run validate yourapp
+
+# Launch your new app
+CLIENT=yourapp npx expo start --clear
+```
+
+Your branded app is now running with your custom colors and configuration!
+
+### Dashboard vs Manual Configuration
+
+| Method | Best For | Time Required |
+|--------|----------|---------------|
+| **Dashboard** | Non-technical users, clients, rapid prototyping | 2-5 minutes |
+| **Manual Config** | Developers, complex customization, version control | 10-15 minutes |
+| **Automated Script** | CLI users, automation, batch creation | 1 minute |
+
+**Recommendation:** Use the dashboard for initial configuration and rapid iteration, then commit the exported config file to version control.
+
+### Dashboard Documentation
+
+For complete dashboard documentation, see [dashboard/README.md](./dashboard/README.md)
+
+---
+
 ## Project Structure
 
 ```
@@ -225,6 +350,11 @@ whitelabel-app/
 │   ├── medicare.config.js
 │   ├── techstartup.config.js
 │   └── default.config.js
+├── dashboard/                    # Configuration UI
+│   ├── app/                      # Next.js pages
+│   ├── components/               # Dashboard components
+│   ├── utils/                    # Config generator
+│   └── README.md                 # Dashboard docs
 ├── hooks/                        # Custom hooks
 │   └── useTheme.ts               # Theme hook
 ├── validation/                   # Zod schemas
@@ -330,7 +460,26 @@ npm run validate fitzone
 
 ## Creating a New Client
 
-### Method 1: Automated Script
+You have **three options** for creating new white-label apps:
+
+### Option 1: Visual Dashboard (Recommended)
+
+**Best for:** Non-technical users, rapid prototyping, visual customization
+
+```bash
+# Start the dashboard
+cd dashboard
+npm install  # First time only
+npm run dev
+
+# Open http://localhost:3001
+# Configure visually, download config file
+# Save to configs/yourapp.config.js
+```
+
+### Option 2: Automated CLI Script
+
+**Best for:** Developers, quick setup, automation
 
 ```bash
 npm run new-client mycompany "My Company Name"
@@ -339,7 +488,9 @@ npm run validate mycompany
 CLIENT=mycompany npm start
 ```
 
-### Method 2: Manual Creation
+### Option 3: Manual Configuration
+
+**Best for:** Full control, complex customization, learning the system
 
 1. **Create configuration file**: `configs/mycompany.config.js`
 
@@ -451,6 +602,7 @@ Each client produces a completely separate app with:
 | **Navigation** | React Navigation |
 | **Theming** | Custom `useTheme` hook |
 | **Build System** | EAS Build |
+| **Dashboard** | Next.js 14 + Tailwind CSS |
 
 ---
 
@@ -459,18 +611,21 @@ Each client produces a completely separate app with:
 ### For Agencies
 - **Deploy multiple client apps** from one codebase
 - **700% ROI** - 7 apps from 1 codebase
-- **Rapid onboarding** - Add config file, generate assets, deploy
+- **Client self-service** - Let clients configure via dashboard
+- **Rapid onboarding** - Dashboard makes setup visual and fast
 - **Consistent updates** - Fix once, deploy everywhere
 
 ### For SaaS Companies
 - **White-label your platform** for customers
-- **Let customers customize** branding and features
+- **Self-service portal** - Customers configure their own branding
 - **Scale to unlimited clients** with minimal overhead
 - **Maintain single codebase** for all deployments
+- **Automated deployment** - From dashboard to app store
 
 ### For Enterprises
 - **Multiple brand portfolios** (e.g., regional brands)
 - **Consistent UX** across all brands
+- **Non-technical teams** can create variants via dashboard
 - **Centralized maintenance** and updates
 - **Brand-specific features** via feature flags
 
@@ -482,8 +637,11 @@ Each client produces a completely separate app with:
 - [Quick Start Guide](./QUICKSTART.md)
 - [Demo Presentation](./DEMO.md)
 - [Screen Documentation](./SCREENS.md)
+- [Deployment Guide](./DEPLOYMENT.md) ⭐
+- [Dashboard Documentation](./dashboard/README.md)
 - [Zod Validation Guide](./docs/ZOD_VALIDATION.md)
 - [Validation Quick Reference](./docs/VALIDATION_QUICK_REF.md)
+- [Changelog](./CHANGELOG.md)
 
 ---
 
@@ -505,15 +663,89 @@ Built with:
 - [Expo](https://expo.dev)
 - [React Native](https://reactnative.dev)
 - [Expo Router](https://docs.expo.dev/router/introduction/)
+- [Next.js](https://nextjs.org)
 - [Zod](https://zod.dev)
+- [Tailwind CSS](https://tailwindcss.com)
+
+---
+
+## 🚀 Deployment Guide
+
+### Version 1.0.0 Deployment
+
+**Pre-Deployment Checklist:**
+
+```bash
+# 1. Validate all client configurations
+npm run validate acme
+npm run validate fitzone
+npm run validate tastybites
+npm run validate shopsmart
+npm run validate homefinder
+npm run validate medicare
+npm run validate techstartup
+
+# 2. Ensure all assets are generated
+npm run generate-assets acme
+npm run generate-assets fitzone
+# ... repeat for all clients
+
+# 3. Test locally
+CLIENT=acme npm start
+# Test all critical flows before production build
+```
+
+**Production Deployment:**
+
+```bash
+# iOS App Store Build
+CLIENT=acme eas build --platform ios --profile production
+
+# Android Play Store Build
+CLIENT=acme eas build --platform android --profile production
+
+# Submit to stores (after successful build)
+eas submit --platform ios --latest
+eas submit --platform android --latest
+```
+
+**Multi-Client Batch Deployment:**
+
+```bash
+# Build all clients for iOS
+for client in acme fitzone tastybites shopsmart homefinder medicare techstartup; do
+  CLIENT=$client eas build --platform ios --profile production --non-interactive
+done
+
+# Build all clients for Android
+for client in acme fitzone tastybites shopsmart homefinder medicare techstartup; do
+  CLIENT=$client eas build --platform android --profile production --non-interactive
+done
+```
+
+**Version Management:**
+
+- Version is managed in `package.json` (currently 1.0.0)
+- EAS Build auto-increments build numbers (configured in `eas.json`)
+- Update version for major releases: `npm version major|minor|patch`
+
+**Post-Deployment:**
+
+1. Tag the release: `git tag -a v1.0.0 -m "Version 1.0.0 Release"`
+2. Push tags: `git push origin v1.0.0`
+3. Create GitHub release with CHANGELOG notes
+4. Update documentation if needed
+5. Monitor crash reports and user feedback
 
 ---
 
 ## Support
 
 For questions and support:
-- Create an issue on GitHub
-- Email: your-email@example.com
+- **GitHub Issues**: [Create an issue](https://github.com/MichaelEakins/whitelabel-app/issues)
+- **Email**: contact@crashbytes.com
+- **Documentation**: Full guides available in [/docs](./docs)
+- **Community**: [Discussions](https://github.com/MichaelEakins/whitelabel-app/discussions)
 
 ---
 
