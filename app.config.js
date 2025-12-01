@@ -11,6 +11,10 @@
  * 3. Run: CLIENT=[client-name] expo start
  * 
  * The configuration is validated using Zod to catch errors early.
+ * 
+ * IMPORTANT: EAS Build requires a fixed slug across all clients.
+ * The slug is always "whitelabel-app" regardless of client.
+ * The appName changes per client for display purposes.
  */
 
 const { validateClientConfig, formatZodErrors } = require('./validation/configSchema');
@@ -49,7 +53,7 @@ const validatedConfig = validation.data;
 export default ({ config }) => ({
   ...config,
   name: validatedConfig.appName,
-  slug: validatedConfig.slug,
+  slug: 'whitelabel-app', // Fixed slug for EAS Build - DO NOT CHANGE
   version: validatedConfig.version || '1.0.0',
   orientation: 'portrait',
   icon: validatedConfig.icon,
@@ -106,7 +110,12 @@ export default ({ config }) => ({
   },
   
   extra: {
+    eas: {
+      projectId: 'bd36674c-bc24-445c-b55d-909f5187e704',
+    },
     clientName,
+    appName: validatedConfig.appName,
+    slug: validatedConfig.slug,
     brandColors: validatedConfig.brandColors,
     features: validatedConfig.features || {},
     apiUrl: validatedConfig.apiUrl,

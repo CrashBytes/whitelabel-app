@@ -1,14 +1,14 @@
 import { Stack } from 'expo-router';
-import Constants from 'expo-constants';
+import { useTheme } from '../hooks/useTheme';
 
 export default function RootLayout() {
-  const clientConfig = Constants.expoConfig?.extra;
+  const { colors } = useTheme();
 
   return (
     <Stack
       screenOptions={{
         headerStyle: {
-          backgroundColor: clientConfig?.brandColors?.primary || '#007AFF',
+          backgroundColor: colors.primary,
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -16,12 +16,10 @@ export default function RootLayout() {
         },
       }}
     >
-      <Stack.Screen 
-        name="index" 
-        options={{ 
-          title: clientConfig?.appName || 'Home'
-        }} 
-      />
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="(onboarding)" options={{ headerShown: false }} />
+      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
     </Stack>
   );
 }
