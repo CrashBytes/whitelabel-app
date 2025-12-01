@@ -1,438 +1,522 @@
-# 🎨 White Label Expo App
+# White Label Multi-Brand App System
 
-A production-ready React Native Expo app template with dynamic white-labeling capabilities. Configure app icons, splash screens, colors, localization, and features per client using simple config files.
+**One Codebase. Seven Brands. Infinite Possibilities.**
 
-## 🚀 Quick Start
+A production-ready React Native white-label app system that powers multiple completely different apps from a single codebase. Change brands instantly with just an environment variable—no code changes required.
+
+---
+
+## Live Demo Portfolio
+
+### Same App, Seven Different Brands
+
+All screenshots below are from the **exact same codebase**—only the `CLIENT` environment variable changes:
+
+#### ACME Business (B2B SaaS)
+**Professional Blue & Red Theme**
+
+![ACME Screenshot](./assets/acme.png)
+
+```bash
+CLIENT=acme npm start
+```
+- **Primary Color**: #1E3A8A (Professional Blue)
+- **Industry**: Business Software
+- **Features**: Analytics, Team Collaboration, Business Dashboard
+
+---
+
+#### FitZone (Fitness & Wellness)
+**Vibrant Green & Orange Theme**
+
+![FitZone Screenshot](./assets/fitzone.png)
+
+```bash
+CLIENT=fitzone npm start
+```
+- **Primary Color**: #10B981 (Vibrant Green)
+- **Industry**: Health & Fitness
+- **Features**: Workout Tracking, Nutrition Plans, Challenges
+
+---
+
+#### TastyBites (Food Delivery)
+**Appetizing Red & Yellow Theme**
+
+![TastyBites Screenshot](./assets/tastybites.png)
+
+```bash
+CLIENT=tastybites npm start
+```
+- **Primary Color**: #DC2626 (Appetizing Red)
+- **Industry**: Restaurant & Delivery
+- **Features**: Live Order Tracking, Menu Browser, Loyalty Program
+
+---
+
+#### ShopSmart (E-commerce)
+**Modern Teal & Pink Theme**
+
+![ShopSmart Screenshot](./assets/shopsmart.png)
+
+```bash
+CLIENT=shopsmart npm start
+```
+- **Primary Color**: #0891B2 (Modern Teal)
+- **Industry**: Retail & Shopping
+- **Features**: Shopping Cart, Wishlist, Product Reviews, Dark Mode
+
+---
+
+#### HomeFinder (Real Estate)
+**Professional Navy & Gold Theme**
+
+![HomeFinder Screenshot](./assets/homefinder.png)
+
+```bash
+CLIENT=homefinder npm start
+```
+- **Primary Color**: #1E3A8A (Professional Navy)
+- **Industry**: Real Estate
+- **Features**: Property Search, Virtual Tours, Mortgage Calculator
+
+---
+
+#### MediCare (Healthcare)
+**Clean Medical Blue & Green Theme**
+
+![MediCare Screenshot](./assets/medicare.png)
+
+```bash
+CLIENT=medicare npm start
+```
+- **Primary Color**: #2563EB (Medical Blue)
+- **Industry**: Healthcare
+- **Features**: Telemedicine, Health Records, Prescriptions
+
+---
+
+#### TechStartup (Technology Platform)
+**Modern Purple & Pink Theme**
+
+![TechStartup Screenshot](./assets/techstartup.png)
+
+```bash
+CLIENT=techstartup npm start
+```
+- **Primary Color**: #6366F1 (Modern Purple)
+- **Industry**: Technology
+- **Features**: Developer Tools, API Integration, Analytics
+
+---
+
+## Key Features
+
+### Complete White-Label System
+- **Zero Code Changes** - Switch brands with environment variable
+- **Zod Validation** - All configurations validated before runtime
+- **Industry-Specific** - Custom features per client
+- **Production Ready** - Separate App Store/Play Store builds
+
+### Full App Screens
+- **Onboarding** - 3-step welcome flow
+- **Authentication** - Login, signup, password recovery
+- **Home Dashboard** - Quick actions, activity feed, stats
+- **Search** - Categories and discovery
+- **Notifications** - Real-time feed
+- **Profile/Settings** - User management
+
+### Dynamic Theming
+- **Brand Colors** - Primary, secondary, accent, error, success
+- **App Identity** - Name, logo, bundle ID
+- **Feature Flags** - Enable/disable features per client
+- **Custom Configuration** - API URLs, support email, locale
+
+---
+
+## Quick Start
+
+### Prerequisites
+- Node.js 18+
+- npm or yarn
+- Expo CLI
 
 ### Installation
 
 ```bash
-cd ~/github/whitelabel-app
+# Clone the repository
+git clone https://github.com/yourusername/whitelabel-app.git
+cd whitelabel-app
+
+# Install dependencies
 npm install
-```
 
-### Run Default App
+# Generate assets for demo clients
+npm run generate-assets acme
+npm run generate-assets fitzone
+npm run generate-assets tastybites
+npm run generate-assets shopsmart
+npm run generate-assets homefinder
+npm run generate-assets medicare
+npm run generate-assets techstartup
 
-```bash
-npm start
-# or
-expo start
-```
-
-### Run Client-Specific App
-
-```bash
-# Run ACME client
+# Start the app with a specific client
 CLIENT=acme npm start
 
-# Run any client
-CLIENT=clientname npm start
+# Press 'w' to open in web browser
 ```
 
-## 📱 Features
+### Running Different Clients
 
-- ✅ **Dynamic Configuration** - Single codebase, multiple brands
-- ✅ **Zod Validation** - Runtime config validation with clear error messages
-- ✅ **Custom Splash Screens** - Per-client splash screens via app.config
-- ✅ **Brand Colors** - Theme customization per client
-- ✅ **Localization** - i18n support (en, es, fr)
-- ✅ **Platform Support** - iOS, Android, Web
-- ✅ **Adaptive Icons** - Android adaptive icons
-- ✅ **URL Schemes** - Custom deep linking per client
-- ✅ **Feature Flags** - Enable/disable features per client
+```bash
+# Professional B2B SaaS
+CLIENT=acme npx expo start --clear
 
-## 🏗️ Architecture
+# Fitness & Wellness
+CLIENT=fitzone npx expo start --clear
 
-### Directory Structure
+# Food Delivery
+CLIENT=tastybites npx expo start --clear
+
+# E-commerce
+CLIENT=shopsmart npx expo start --clear
+
+# Real Estate
+CLIENT=homefinder npx expo start --clear
+
+# Healthcare
+CLIENT=medicare npx expo start --clear
+
+# Technology Platform
+CLIENT=techstartup npx expo start --clear
+```
+
+**Note:** Always use `--clear` when switching between clients to clear Metro bundler cache.
+
+---
+
+## Project Structure
 
 ```
 whitelabel-app/
-├── app/                    # Expo Router app directory
-│   ├── _layout.tsx        # Root layout with branding
-│   └── index.tsx          # Home screen showing config
-├── assets/                 # Client-specific assets
-│   ├── default/           # Default brand assets
-│   │   ├── icon.png
-│   │   ├── splash.png
-│   │   └── adaptive-icon.png
-│   └── acme/              # ACME client assets
-│       ├── icon.png
-│       ├── splash.png
-│       └── adaptive-icon.png
-├── configs/               # Client configurations
-│   ├── default.config.js  # Default config template
-│   └── acme.config.js     # Example client config
-├── hooks/                 # Custom hooks
-│   └── useTranslation.ts  # i18n hook
-├── locales/               # Translations
-│   ├── en.json
-│   ├── es.json
-│   └── fr.json
-├── app.config.js          # Dynamic Expo configuration
+├── app/                          # Expo Router screens
+│   ├── (auth)/                   # Authentication flow
+│   │   ├── login.tsx
+│   │   ├── signup.tsx
+│   │   └── forgot-password.tsx
+│   ├── (onboarding)/             # Onboarding flow
+│   │   └── index.tsx
+│   ├── (tabs)/                   # Main app tabs
+│   │   ├── index.tsx             # Home/Dashboard
+│   │   ├── search.tsx
+│   │   ├── notifications.tsx
+│   │   └── profile.tsx
+│   └── _layout.tsx               # Root layout
+├── components/                   # Reusable components
+│   ├── Button.tsx                # Themed button
+│   ├── Input.tsx                 # Themed input
+│   └── Card.tsx                  # Themed card
+├── configs/                      # Client configurations
+│   ├── acme.config.js
+│   ├── fitzone.config.js
+│   ├── tastybites.config.js
+│   ├── shopsmart.config.js
+│   ├── homefinder.config.js
+│   ├── medicare.config.js
+│   ├── techstartup.config.js
+│   └── default.config.js
+├── hooks/                        # Custom hooks
+│   └── useTheme.ts               # Theme hook
+├── validation/                   # Zod schemas
+│   └── configSchema.js
+├── scripts/                      # Utility scripts
+│   ├── new-client.js
+│   ├── validate-config.js
+│   ├── generate-png-placeholders.js
+│   └── demo-setup.sh
+├── assets/                       # Client assets & screenshots
+│   ├── acme/
+│   ├── fitzone/
+│   ├── tastybites/
+│   ├── shopsmart/
+│   ├── homefinder/
+│   ├── medicare/
+│   ├── techstartup/
+│   ├── acme.png                  # Screenshot
+│   ├── fitzone.png               # Screenshot
+│   ├── tastybites.png            # Screenshot
+│   ├── shopsmart.png             # Screenshot
+│   ├── homefinder.png            # Screenshot
+│   ├── medicare.png              # Screenshot
+│   └── techstartup.png           # Screenshot
+├── app.config.js                 # Dynamic Expo config
 └── package.json
 ```
 
-## 🎨 Adding a New Client
+---
 
-### 1. Create Client Config
+## How It Works
 
-Copy `configs/default.config.js` to `configs/yourclient.config.js`:
+### 1. Configuration-Driven Architecture
+
+Each client has a configuration file in `configs/`:
+
+```javascript
+// configs/fitzone.config.js
+module.exports = {
+  appName: 'FitZone',
+  slug: 'fitzone',
+  scheme: 'fitzone',
+  
+  brandColors: {
+    primary: '#10B981',    // Vibrant Green
+    secondary: '#F59E0B',  // Energetic Orange
+    accent: '#EF4444',     // Active Red
+  },
+  
+  features: {
+    workoutTracking: true,
+    nutritionPlans: true,
+    challenges: true,
+  },
+  
+  apiUrl: 'https://api.fitzone.app',
+  supportEmail: 'support@fitzone.app',
+};
+```
+
+### 2. Dynamic Theme Hook
+
+Components use the `useTheme` hook to access client configuration:
+
+```typescript
+import { useTheme } from '../hooks/useTheme';
+
+function MyComponent() {
+  const { colors, config } = useTheme();
+  
+  return (
+    <View style={{ backgroundColor: colors.primary }}>
+      <Text>{config.appName}</Text>
+    </View>
+  );
+}
+```
+
+### 3. Automatic Theming
+
+All components automatically adapt to the client's brand:
+
+```typescript
+// Button component
+<Button
+  title="Get Started"
+  onPress={handlePress}
+  variant="primary"  // Uses colors.primary automatically
+/>
+```
+
+### 4. Zod Validation
+
+All configurations are validated before runtime:
+
+```bash
+npm run validate fitzone
+
+✅ Configuration validated successfully
+```
+
+---
+
+## Creating a New Client
+
+### Method 1: Automated Script
+
+```bash
+npm run new-client mycompany "My Company Name"
+npm run generate-assets mycompany
+npm run validate mycompany
+CLIENT=mycompany npm start
+```
+
+### Method 2: Manual Creation
+
+1. **Create configuration file**: `configs/mycompany.config.js`
 
 ```javascript
 module.exports = {
-  appName: 'Your Client Name',
-  slug: 'yourclient-app',
-  scheme: 'yourclient',
+  appName: 'My Company',
+  slug: 'mycompany',
+  scheme: 'mycompany',
+  version: '1.0.0',
   
-  icon: './assets/yourclient/icon.png',
-  
+  icon: './assets/mycompany/icon.png',
   splash: {
-    image: './assets/yourclient/splash.png',
+    image: './assets/mycompany/splash.png',
+    resizeMode: 'contain',
     backgroundColor: '#YOUR_COLOR',
   },
   
   ios: {
-    bundleIdentifier: 'com.yourclient.app',
+    bundleIdentifier: 'com.mycompany.app',
   },
   
   android: {
-    package: 'com.yourclient.app',
+    package: 'com.mycompany.app',
+    adaptiveIcon: {
+      foregroundImage: './assets/mycompany/adaptive-icon.png',
+      backgroundColor: '#YOUR_COLOR',
+    },
   },
   
   brandColors: {
     primary: '#YOUR_PRIMARY',
     secondary: '#YOUR_SECONDARY',
-    // ... more colors
+    accent: '#YOUR_ACCENT',
+    background: '#FFFFFF',
+    text: '#000000',
+    error: '#FF3B30',
+    success: '#34C759',
   },
   
   features: {
     auth: true,
-    darkMode: true,
-    // ... feature flags
+    notifications: true,
+    // ... your features
   },
   
-  apiUrl: 'https://api.yourclient.com',
-  supportEmail: 'support@yourclient.com',
+  apiUrl: 'https://api.mycompany.com',
+  supportEmail: 'support@mycompany.com',
   locale: 'en',
 };
 ```
 
-### 2. Add Client Assets
+2. **Generate placeholder assets**:
+```bash
+npm run generate-assets mycompany
+```
 
-Create directory: `assets/yourclient/`
+3. **Validate configuration**:
+```bash
+npm run validate mycompany
+```
 
-Add these files:
-- `icon.png` (1024x1024px)
-- `splash.png` (1242x2436px)
-- `adaptive-icon.png` (1024x1024px)
-- `favicon.png` (48x48px)
+4. **Launch your app**:
+```bash
+CLIENT=mycompany npm start
+```
 
-See `assets/default/README.md` for detailed specifications.
+---
 
-### 3. Test Client
+## Building for Production
+
+### Development Build (for testing on devices)
 
 ```bash
-CLIENT=yourclient npm start
+# iOS
+CLIENT=fitzone eas build --profile development --platform ios
+
+# Android
+CLIENT=fitzone eas build --profile development --platform android
 ```
 
-### 4. Build for Production
+### Production Build (for App Store/Play Store)
 
 ```bash
-# Install EAS CLI
-npm install -g eas-cli
+# iOS App Store
+CLIENT=fitzone eas build --platform ios
 
-# Login to Expo
-eas login
-
-# Build iOS
-CLIENT=yourclient eas build --platform ios
-
-# Build Android
-CLIENT=yourclient eas build --platform android
+# Android Play Store
+CLIENT=fitzone eas build --platform android
 ```
 
-## 🌍 Localization
+Each client produces a completely separate app with:
+- Different app name
+- Different bundle identifier
+- Different branding
+- Different features
+- Separate App Store listing
 
-Add translations in `locales/[lang].json`:
+---
 
-```json
-{
-  "welcome": "Welcome to",
-  "clientInfo": "Client Information",
-  // ... more translations
-}
-```
+## Technical Stack
 
-Use in components:
+| Category | Technology |
+|----------|-----------|
+| **Framework** | React Native (Expo SDK 54) |
+| **Routing** | Expo Router (file-based) |
+| **Language** | TypeScript |
+| **Validation** | Zod schemas |
+| **State Management** | React Hooks |
+| **Navigation** | React Navigation |
+| **Theming** | Custom `useTheme` hook |
+| **Build System** | EAS Build |
 
-```typescript
-import { useTranslation } from '../hooks/useTranslation';
+---
 
-function MyComponent() {
-  const { t } = useTranslation();
-  return <Text>{t('welcome')}</Text>;
-}
-```
+## Use Cases
 
-## 🎨 Accessing Config in Code
+### For Agencies
+- **Deploy multiple client apps** from one codebase
+- **700% ROI** - 7 apps from 1 codebase
+- **Rapid onboarding** - Add config file, generate assets, deploy
+- **Consistent updates** - Fix once, deploy everywhere
 
-```typescript
-import Constants from 'expo-constants';
+### For SaaS Companies
+- **White-label your platform** for customers
+- **Let customers customize** branding and features
+- **Scale to unlimited clients** with minimal overhead
+- **Maintain single codebase** for all deployments
 
-const config = Constants.expoConfig?.extra;
+### For Enterprises
+- **Multiple brand portfolios** (e.g., regional brands)
+- **Consistent UX** across all brands
+- **Centralized maintenance** and updates
+- **Brand-specific features** via feature flags
 
-// Access client name
-const clientName = config?.clientName;
+---
 
-// Access brand colors
-const primaryColor = config?.brandColors?.primary;
+## Documentation
 
-// Check feature flags
-const hasAuth = config?.features?.auth;
+- [Complete Setup Guide](./SETUP.md)
+- [Quick Start Guide](./QUICKSTART.md)
+- [Demo Presentation](./DEMO.md)
+- [Screen Documentation](./SCREENS.md)
+- [Zod Validation Guide](./docs/ZOD_VALIDATION.md)
+- [Validation Quick Reference](./docs/VALIDATION_QUICK_REF.md)
 
-// Get API URL
-const apiUrl = config?.apiUrl;
-```
+---
 
-## 🔧 Configuration Options
+## Contributing
 
-### Brand Colors
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-```javascript
-brandColors: {
-  primary: '#007AFF',      // Main brand color
-  secondary: '#5856D6',    // Secondary actions
-  accent: '#FF9500',       // Highlights
-  background: '#FFFFFF',   // App background
-  text: '#000000',         // Text color
-  error: '#FF3B30',        // Error states
-  success: '#34C759',      // Success states
-}
-```
+---
 
-### Features
+## License
 
-```javascript
-features: {
-  auth: true,              // Authentication
-  darkMode: true,          // Dark mode support
-  analytics: true,         // Analytics tracking
-  pushNotifications: true, // Push notifications
-  // Add custom features
-}
-```
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-### Splash Screen
+---
 
-```javascript
-splash: {
-  image: './assets/client/splash.png',
-  resizeMode: 'contain',   // or 'cover'
-  backgroundColor: '#ffffff',
-}
-```
+## Acknowledgments
 
-## 📦 Building & Deployment
-
-### iOS
-
-```bash
-# Configure
-CLIENT=yourclient eas build:configure
-
-# Build
-CLIENT=yourclient eas build --platform ios --profile production
-
-# Submit to App Store
-CLIENT=yourclient eas submit --platform ios
-```
-
-### Android
-
-```bash
-# Build
-CLIENT=yourclient eas build --platform android --profile production
-
-# Submit to Play Store
-CLIENT=yourclient eas submit --platform android
-```
-
-## 🔐 Environment Variables
-
-Set client at build time:
-
-```bash
-# Development
-CLIENT=acme expo start
-
-# Production builds
-CLIENT=acme eas build
-```
-
-## 📱 Platform-Specific Configuration
-
-### iOS
-
-```javascript
-ios: {
-  bundleIdentifier: 'com.client.app',
-  supportsTablet: true,
-  infoPlist: {
-    CFBundleDisplayName: 'Client Name',
-    LSApplicationQueriesSchemes: ['clientscheme'],
-  },
-}
-```
-
-### Android
-
-```javascript
-android: {
-  package: 'com.client.app',
-  adaptiveIcon: {
-    foregroundImage: './assets/client/adaptive-icon.png',
-    backgroundColor: '#FFFFFF',
-  },
-  permissions: ['CAMERA', 'NOTIFICATIONS'],
-}
-```
-
-## 🛠️ Development Tips
-
-### Hot Reload
-
-Changes to client configs require app restart:
-```bash
-# Stop current server
-# Change CLIENT variable
-CLIENT=newclient npm start
-```
-
-### Asset Management
-
-- Use high-resolution assets (1024x1024 minimum)
-- Compress PNGs with [TinyPNG](https://tinypng.com)
-- Consider git-lfs for binary assets
-- Test on multiple device sizes
-
-### Testing Multiple Clients
-
-```bash
-# Terminal 1
-CLIENT=default npm start
-
-# Terminal 2  
-CLIENT=acme npm start -- --port 19001
-
-# Terminal 3
-CLIENT=other npm start -- --port 19002
-```
-
-## ✅ Configuration Validation
-
-All client configs are validated using [Zod](https://zod.dev) for type safety and format checking.
-
-### Automatic Validation
-
-Configs are validated when you start the app:
-
-```bash
-CLIENT=acme npm start
-
-# ✅ Valid config:
-✅ Loaded config for client: acme
-✅ Configuration validated successfully
-
-# ❌ Invalid config:
-❌ Configuration validation failed!
-Errors:
-  - ios.bundleIdentifier: Must be a valid bundle identifier
-  - brandColors.primary: Must be a valid hex color
-```
-
-### Manual Validation
-
-```bash
-# Validate before running
-npm run validate acme
-```
-
-### Common Validation Rules
-
-- **Bundle IDs**: Lowercase, reverse domain format (e.g., `com.acme.app`)
-- **Package Names**: Same as bundle IDs, underscores allowed for Android
-- **Colors**: Hex format with # (e.g., `#1E3A8A`)
-- **URLs**: Valid URLs with protocol (e.g., `https://api.acme.com`)
-- **Emails**: Valid email format (e.g., `support@acme.com`)
-
-See [docs/ZOD_VALIDATION.md](docs/ZOD_VALIDATION.md) for complete validation rules.
-
-## 📚 Resources
-
-- [Expo Documentation](https://docs.expo.dev)
+Built with:
+- [Expo](https://expo.dev)
+- [React Native](https://reactnative.dev)
 - [Expo Router](https://docs.expo.dev/router/introduction/)
-- [App Configuration](https://docs.expo.dev/workflow/configuration/)
-- [i18n-js Documentation](https://github.com/fnando/i18n-js)
-- [EAS Build](https://docs.expo.dev/build/introduction/)
-- [Zod Documentation](https://zod.dev)
+- [Zod](https://zod.dev)
 
-## 🤝 Contributing
+---
 
-1. Create client config in `configs/`
-2. Add assets to `assets/[client]/`
-3. Test thoroughly on iOS and Android
-4. Document any custom features
-5. Update this README if needed
+## Support
 
-## 📄 License
+For questions and support:
+- Create an issue on GitHub
+- Email: your-email@example.com
 
-MIT
+---
 
-## 🆘 Troubleshooting
+**Made with love for developers who need to deploy multiple branded apps efficiently**
 
-### Validation Errors
-
-**Problem**: Config fails Zod validation
-
-**Solution**:
-- Read the specific error message
-- Check [docs/ZOD_VALIDATION.md](docs/ZOD_VALIDATION.md) for format rules
-- Run `npm run validate <client>` for detailed errors
-- Common issues:
-  - Bundle IDs with uppercase or underscores (iOS)
-  - Colors missing # or wrong format
-  - Invalid asset paths
-
-### Config Not Loading
-
-- Verify file exists: `configs/[client].config.js`
-- Check for syntax errors in config
-- Run `npm run validate <client>` to check validation
-- Restart development server
-
-### Assets Not Showing
-
-- Verify asset paths in config
-- Check file extensions match exactly
-- Ensure assets meet size requirements
-- Run `npm run validate <client>` to verify assets exist
-- Clear cache: `expo start -c`
-
-### Build Failures
-
-- Validate config first: `npm run validate <client>`
-- Check bundle identifiers are unique
-- Verify all required assets exist
-- Ensure package names follow platform conventions
-- Review EAS build logs
-
-## 🎯 Roadmap
-
-- [ ] Add more example clients
-- [ ] Automated asset generation
-- [✅] Config validation script (Zod integration complete)
-- [ ] UI theme provider
-- [ ] More translations
-- [ ] Advanced feature flags
-- [ ] Custom font support
-- [ ] TypeScript types from Zod schema
+*One codebase. Unlimited brands. Infinite possibilities.*
