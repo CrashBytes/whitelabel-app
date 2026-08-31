@@ -29,7 +29,7 @@
     "expo-status-bar": "~57.0.1",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "react-native": "0.86.2",
+    "react-native": "0.86.3",
     "react-native-gesture-handler": "~3.2.1",
     "react-native-reanimated": "4.5.3",
     "react-native-safe-area-context": "~5.9.0",
@@ -43,6 +43,10 @@
     "typescript": "~7.0.2"
   },
   "overrides": {
+    "@expo/metro": ">=56.0.2",
+    "metro": ">=0.84.5",
+    "metro-config": ">=0.84.5",
+    "metro-transform-worker": ">=0.84.5",
     "shell-quote": ">=1.9.0",
     "@xmldom/xmldom": "^0.8.13",
     "picomatch@<2.3.2": "2.3.2",
